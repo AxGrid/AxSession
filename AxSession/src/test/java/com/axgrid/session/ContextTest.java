@@ -39,9 +39,11 @@ public class ContextTest {
 
     @Before
     public void createSession() {
-        sessionUuid = UUID.randomUUID().toString();
+
         userUuid = UUID.randomUUID().toString();
-        sessionService.signIn(userUuid);
+        AxSession session = sessionService.signIn(userUuid);
+        sessionUuid = session.getSession();
+        log.info("Create session {} for user {}", session.getUuid(), session.getSession());
     }
 
     @Test

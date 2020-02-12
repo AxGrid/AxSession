@@ -1,6 +1,7 @@
 package com.axgrid.session;
 
 import com.axgrid.session.dto.AxSession;
+import com.axgrid.session.repository.AxSessionRepository;
 import com.axgrid.session.service.AxSessionService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -26,11 +27,14 @@ public class SessionTest {
     @Autowired
     AxSessionService sessionService;
 
+    @Autowired
+    AxSessionRepository sessionRepository;
+
     @Test
     public void testSessionCreation() {
         String sessionUuid = UUID.randomUUID().toString();
         String userUuid = UUID.randomUUID().toString();
-        AxSession session = sessionService.get(sessionUuid);
+        AxSession session = sessionRepository.getUserBySession(sessionUuid);
         Assert.assertNull(session);
         session = sessionService.signIn(userUuid);
         sessionUuid = session.getSession();

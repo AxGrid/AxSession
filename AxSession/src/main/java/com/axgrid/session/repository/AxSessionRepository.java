@@ -3,6 +3,7 @@ package com.axgrid.session.repository;
 import com.axgrid.session.AxSessionConfiguration;
 import com.axgrid.session.dto.AxSession;
 import com.axgrid.session.exception.AxSessionExpiredException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
@@ -17,6 +18,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Repository
+@Slf4j
 public class AxSessionRepository {
 
     @Autowired
@@ -26,10 +28,11 @@ public class AxSessionRepository {
     int ttlInMinutes = 300;
 
 
-    @Cacheable(cacheNames = {AxSessionConfiguration.SESSION_CACHE}, key="#session", unless = "#result == null")
+    //@Cacheable(cacheNames = {AxSessionConfiguration.SESSION_CACHE}, key="#session", unless = "#result == null")
     public AxSession getUserBySession(String session) {
         try {
             AxSession userSession = jdbcTemplate.queryForObject("SELECT uuid, session, date FROM ax_session WHERE session=?", new Object[]{session}, new AxSession.Mapper());
+            log.info("Session is {}", userSession);
             if (userSession == null) return null;
             AxSession lastSession = getUserByUUID(userSession.getUuid());
             userSession.setValid(userSession.getSession().equals(lastSession.getSession()));

@@ -19,7 +19,6 @@ public class AxSessionService {
         return res;
     }
 
-
     @Scheduled(fixedDelayString = "${axgrid.session.cleanTimeout:5000}")
     public void cleanOldSession() {
         sessionRepository.cleanOldSession();

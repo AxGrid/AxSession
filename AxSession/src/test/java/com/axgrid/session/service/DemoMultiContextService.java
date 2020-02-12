@@ -18,8 +18,8 @@ public class DemoMultiContextService extends AxContextService<MultiContext, Stri
 
     @Override
     public MultiContext getContext(String o) {
+        if (o == null) return null;
         AxContext ctx = contextService.getContext(o);
-        if (ctx == null) return null;
         MultiContext res = new MultiContext(ctx);
         res.setRnd(rnd.nextInt(100) + 1);
         return res;
