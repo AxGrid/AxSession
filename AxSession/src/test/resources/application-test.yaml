@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: AxSession (Test)
+  datasource:
+    platform: h2
+    url: jdbc:h2:mem:testdb;mode=MySQL
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''
+    initialization-mode: always
+  h2:
+    console:
+      enabled: true
+      path: /h2
