@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Random;
 
 @Service
-public class DemoMultiContextService extends AxContextService<MultiContext, String> {
+public class DemoMultiContextService extends AxBaseContextService<MultiContext, String> {
 
     @Autowired
     DemoContextService contextService;
@@ -17,7 +17,7 @@ public class DemoMultiContextService extends AxContextService<MultiContext, Stri
     final static Random rnd = new Random(new Date().getTime());
 
     @Override
-    public MultiContext getContext(String o) {
+    protected MultiContext getContextObject(String o) {
         if (o == null) return null;
         AxContext ctx = contextService.getContext(o);
         MultiContext res = new MultiContext(ctx);

@@ -5,11 +5,10 @@ import com.axgrid.session.dto.AxSession;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DemoContextService extends AxContextService<AxContext, String> {
-
+public class DemoContextService extends AxBaseContextService<AxContext, String> {
 
     @Override
-    public AxContext getContext(String o) {
+    protected AxContext getContextObject(String o) {
         if (o == null || o.equals("")) return null;
         AxSession session = sessionService.get(o);
         AxContext ctx = new AxContext();

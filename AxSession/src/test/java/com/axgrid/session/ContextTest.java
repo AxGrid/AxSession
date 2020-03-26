@@ -1,6 +1,7 @@
 package com.axgrid.session;
 
 
+import com.axgrid.session.dto.AxContext;
 import com.axgrid.session.dto.AxSession;
 import com.axgrid.session.dto.MultiContext;
 import com.axgrid.session.service.AxSessionService;
@@ -49,10 +50,14 @@ public class ContextTest {
     @Test
     public void testContextCreation() {
 
-        MultiContext ctx = service.getContext(sessionUuid);
+        AxContext ctx = service.getContext(sessionUuid);
+
+
         Assert.assertNotNull(ctx);
+        Assert.assertTrue(ctx instanceof MultiContext);
+        MultiContext mctx = (MultiContext)ctx;
         Assert.assertEquals(ctx.getUuid(), userUuid);
-        Assert.assertNotEquals(ctx.getRnd(), 0);
+        Assert.assertNotEquals(mctx.getRnd(), 0);
 
     }
 

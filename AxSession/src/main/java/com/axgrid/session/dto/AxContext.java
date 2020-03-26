@@ -11,5 +11,7 @@ public class AxContext {
     public String getUuid() { return session.getUuid(); }
     public boolean isLoggedIn() { return session.isLoggedIn(); }
     public boolean isValid() { return session.isValid(); }
+    public String getSessionUUID() { return session.getSession(); }
+    String trx;
 
 }
